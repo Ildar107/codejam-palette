@@ -5,57 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="style.css" rel="stylesheet">
+    <script src="scripts/index.js" type="module"></script>
     <title>Palette</title>
 </head>
 <body>
-    <header>
-        <img src="./images/menu.png" alt="" class="header--expand-icon">
-        <h1 class="header--title">CodeJam - Pallete</h1>
-        <div class="header--menu">
-            <img src="./images/menu icon.png" alt="" class="header--menu-icon">
-        </div>
-    </header>
-    <div class="whiteboard">
-        <div class="whiteboard--tools">
-            <div class="whiteboard--tools--main">
-                <div class="backet">
-                    <img src="./images/backet.png" alt="" class="backet--icon">
-                    <span class="backet--title">Paint bucket</span>
+    <div class="wrapper">
+        <header>
+            <img src="./images/menu.png" alt="" class="header--expand-icon">
+            <h1 class="header--title">CodeJam - Pallete</h1>
+            <div class="header--menu">
+                <img src="./images/menu icon.png" alt="" class="header--menu-icon">
+            </div>
+        </header>
+        <div class="whiteboard">
+            <div class="whiteboard--tools">
+                <div class="whiteboard--tools--main">
+                    <button class="backet">
+                        <img src="./images/backet.png" alt="" class="backet--icon">
+                        <span class="backet--title">Paint bucket</span>
+                    </button>
+                    <button class="choose-color">
+                            <img src="./images/choose-color.png" alt="" class="choose-color--icon">
+                            <span class="choose-color--title">Choose color</span>
+                    </button>
+                    <button class="pencil">
+                            <img src="./images/pencil.png" alt="" class="pencil--icon">
+                            <span class="pencil--title">Pencil</span>
+                    </button>
+                    <button class="transform">
+                            <img src="./images/transform.png" alt="" class="transform--icon">
+                            <span class="transform--title">Transform</span>
+                    </button>
                 </div>
-                <div class="choose-color">
-                        <img src="./images/choose-color.png" alt="" class="choose-color--icon">
-                        <span class="choose-color--title">Choose color</span>
-                </div>
-                <div class="move">
-                        <img src="./images/move.png" alt="" class="move--icon">
-                        <span class="move--title">Move</span>
-                </div>
-                <div class="transform">
-                        <img src="./images/transform.png" alt="" class="transform--icon">
-                        <span class="transform--title">Transform</span>
+                <div class="whiteboard--tools--color">
+                    <button class="current-color">
+                        <div class="current-color--circle circle"></div>
+                        <span class="current-color--title">Current color</span>
+                    </button>
+                    <button class="prev-color">
+                            <div class="prev-color--circle circle"></div>
+                            <span class="prev-color--title">Prev color</span>
+                    </button>
+                    <div class="menu-separater"></div>
+                    <button class="red-color">
+                            <div class="red-color--circle circle"></div>
+                            <span class="red-color--title">Red color</span>
+                    </button>
+                    <button class="blue-color">
+                            <div class="blue-color--circle circle"></div>
+                            <span class="blue-color--title">Blue color</span>
+                    </button>
                 </div>
             </div>
-            <div class="whiteboard--tools--color">
-                <div class="current-color">
-                    <div class="current-color--circle circle"></div>
-                    <span class="current-color--title">Current color</span>
-                </div>
-                <div class="prev-color">
-                        <div class="prev-color--circle circle"></div>
-                        <span class="prev-color--title">Prev color</span>
-                </div>
-                <div class="red-color">
-                        <div class="red-color--circle circle"></div>
-                        <span class="red-color--title">Red color</span>
-                </div>
-                <div class="blue-color">
-                        <div class="blue-color--circle circle"></div>
-                        <span class="blue-color--title">Blue color</span>
+            <div class="whiteboard--work-place">
+                <canvas id="work-canvas" width="512" height="512"></canvas>
+            </div>
+            <div class="whiteboard--changer">
+                <div class="whiteboard--changer--swither">
+                    <div class="matrix-small">
+                            <input class="matrix-small--radio" type="radio" id="small" name="switcher"></input>
+                            <label class="matrix-small--title" for="small">Matrix 4x4</label>
+                    </div>
+                    <div class="matrix-large">
+                            <input class="matrix-large--radio" type="radio" id="large" name="switcher"></input>
+                            <label class="matrix-large--title" for="large">Matrix 32x32</label>
+                    </div>
+                    <div class="image">
+                            <input class="image--radio" type="radio" id="default-image" name="switcher"></input>
+                            <label class="image--title" for="image">Image</label>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="whiteboard--work-place">
-            <canvas id="work-canvas" width="512" height="512"></canvas>
         </div>
     </div>
 </body>
