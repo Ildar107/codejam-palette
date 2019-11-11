@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="style.css" rel="stylesheet">
-    <script src="scripts/index.js" type="module"></script>
+    <script src="./scripts/index.js" type="module"></script>
     <title>Palette</title>
 </head>
 <body>
@@ -24,7 +24,7 @@
                         <img src="./images/backet.png" alt="" class="bucket--icon">
                         <span class="bucket--title">Paint bucket</span>
                     </button>
-                    <button class="choose-color">
+                    <button class="choose-color" id="color-picker">
                             <img src="./images/choose-color.png" alt="" class="choose-color--icon">
                             <span class="choose-color--title">Choose color</span>
                     </button>
@@ -38,7 +38,8 @@
                     </button>
                 </div>
                 <div class="whiteboard--tools--color">
-                    <button class="current-color" >
+                    <button class="current-color"  id="current-color-container">
+                        <input type="color" id="input-color"/>
                         <div class="current-color--circle circle" id="current-color"></div>
                         <span class="current-color--title">Current color</span>
                     </button>

@@ -126,6 +126,10 @@ canvas {
     border-bottom: 1px solid #8080804f;
 }
 
+.current-color input {
+    display: none;
+}
+
 .circle {
     width: 24px;
     height: 24px;
@@ -200,6 +204,10 @@ canvas {
 
 .whiteboard--changer--swither div input {
     margin-right: 10px;
+}
+
+.image input {
+    visibility: hidden;
 }
 
 .selected-button {

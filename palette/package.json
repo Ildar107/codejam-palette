@@ -1,0 +1,14 @@
+{
+  "name": "codejam-palette",
+  "version": "1.0.0",
+  "description": "rsschool learn project",
+  "main": "index.js",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint ./scripts/*.js"
+  },
+  "author": "Ildar",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^6.6.0"
+  }
+}

@@ -3,23 +3,51 @@ let instrument = 'pencil';
 let color = '#008000';
 
 window.onload = function() {
-    const smallMatrixCheker = document.getElementById('small');
-    const largeMatrixCheker = document.getElementById('large');
-    const imageChecker = document.getElementById('default-image');
+    const smallMatrixChecker = document.getElementById('small');
+    const largeMatrixChecker = document.getElementById('large');
+    const startImage = document.getElementById('default-image');
     const canvas = document.getElementById('work-canvas');
 
     const pencil = document.getElementById('pencil');
     const bucket = document.getElementById('bucket');
+    const colorPicker = document.getElementById('color-picker');
 
     const blueColor = document.getElementById('blue');
     const redColor = document.getElementById('red');
     const currColor = document.getElementById('current-color');
     const prevColor = document.getElementById('prev-color');
+    const inputColor = document.getElementById('input-color');
+    const currColorContainer = document.getElementById('current-color-container');
     currColor.style.backgroundColor = color;
-    prevColor.style.backgroundColor  = '#000';
+    prevColor.style.backgroundColor = '#000';
     let lastX = 0;
     let lastY = 0;
 
+    document.onkeydown = (e) => {
+        if (e.code === 'KeyB') {
+            bucket.click();
+        }
+        if (e.code === 'KeyP') {
+            pencil.click();
+        }
+        if (e.code === 'KeyC') {
+            colorPicker.click();
+        }
+      };
+
+    inputColor.addEventListener('change', (e) => {
+        color = inputColor.value;
+        prevColor.style.backgroundColor = currColor.style.backgroundColor;
+        currColor.style.backgroundColor = color;
+    });
+    currColorContainer.addEventListener('click', () => {
+        inputColor.click();
+    });  
+    prevColor.parentElement.addEventListener('click', () => {
+        color = prevColor.style.backgroundColor;
+        prevColor.style.backgroundColor = currColor.style.backgroundColor;
+        currColor.style.backgroundColor = color;
+    });
     blueColor.addEventListener('click', () => {
         color = '#0000ff';
         prevColor.style.backgroundColor = currColor.style.backgroundColor;
@@ -32,57 +60,64 @@ window.onload = function() {
     });
 
     pencil.addEventListener('click', () => {
-        instrument = 'pencil'
+        instrument = 'pencil';
         if(pencil.className.search('selected-button') >= 0) {
             pencil.className = pencil.className.replace(/selected-button/g, '')
         }
         else {
             pencil.className += ' selected-button';
             bucket.className = bucket.className.replace(/selected-button/g, '')
+            colorPicker.className = colorPicker.className.replace(/selected-button/g, '')
         }
     });
     bucket.addEventListener('click', () =>{
-        instrument = 'bucket'
+        instrument = 'bucket';
         if(bucket.className.search('selected-button') >= 0) {
             bucket.className = bucket.className.replace(/selected-button/g, '')
         }
         else {
             bucket.className += ' selected-button';
             pencil.className = pencil.className.replace(/selected-button/g, '')
+            colorPicker.className = colorPicker.className.replace(/selected-button/g, '')
+        }
+    });
+    colorPicker.addEventListener('click', (e) =>{
+        instrument = 'color-picker';
+        if(colorPicker.className.search('selected-button') >= 0) {
+            colorPicker.className = colorPicker.className.replace(/selected-button/g, '')
+        }
+        else {
+            colorPicker.className += ' selected-button';
+            pencil.className = pencil.className.replace(/selected-button/g, '')
+            bucket.className = bucket.className.replace(/selected-button/g, '')
         }
     });
 
-    smallMatrixCheker.parentElement.addEventListener('click', (e) => {
+    smallMatrixChecker.parentElement.addEventListener('click', (e) => {
         if (e.returnValue) {
-            smallMatrixCheker.checked = true;
+            smallMatrixChecker.checked = true;
             matrixSize = 4;
         }
     });
-
-    largeMatrixCheker.parentElement.addEventListener('click', (e) => {
+    largeMatrixChecker.parentElement.addEventListener('click', (e) => {
         if (e.returnValue) {
-            largeMatrixCheker.checked = true;
+            largeMatrixChecker.checked = true;
             matrixSize = 32;
         }
     });
-
-    imageChecker.parentElement.addEventListener('click', (e) => {
+    startImage.parentElement.addEventListener('click', (e) => {
         if (e.returnValue) {
-            imageChecker.checked = true;
             setPictureToCanvas();
         }
     });
 
-    imageChecker.checked = true;
-    setPictureToCanvas();
-
-    let isDrawing = false;
     canvas.addEventListener('mousemove', (e) => {
         if(!isDrawing) { return; }
         if(instrument === 'pencil') { 
             drawWithAlgorithm(lastX, lastY, e.offsetX, e.offsetY);
             lastX = e.offsetX;
             lastY = e.offsetY;
+            localStorage.setItem('currentImage', canvas.toDataURL("image/png"))
         }
     });
     canvas.addEventListener('mousedown', (e) => { 
@@ -98,7 +133,29 @@ window.onload = function() {
             lastY = e.offsetY;
         }
     });
-    canvas.addEventListener('mouseup', (e) => isDrawing = false);
+    canvas.addEventListener('mouseup', () => isDrawing = false);
+    this.document.body.addEventListener('mouseup', () => isDrawing = false);
+    canvas.addEventListener('click', (e) => {
+        if(instrument === 'color-picker') {
+            let ctx = canvas.getContext("2d");
+            const newColor = ctx.getImageData(e.offsetX, e.offsetY, 1, 1).data;
+            color = `rgba(${newColor[0]},${newColor[1]},${newColor[2]},${newColor[3]})`;
+            prevColor.style.backgroundColor = currColor.style.backgroundColor;
+            currColor.style.backgroundColor = color;
+        }
+    });
+
+    
+    if(localStorage.getItem('currentImage')) {
+        setPictureToCanvas(localStorage.getItem('currentImage'));
+    }
+    else {
+        setPictureToCanvas();
+    }
+    smallMatrixChecker.checked = true;
+    let isDrawing = false;
+    pencil.click();
+    
 };
 
 function draw(point) {
@@ -165,24 +222,25 @@ function drawWithAlgorithm(x1, y1, x2, y2) {
     }
 }
 
-function setPictureToCanvas()
+function setPictureToCanvas(imgUrl)
 {
-const canvas = document.getElementById('work-canvas')
-const ctx = canvas.getContext("2d");
-const image = new Image();
-image.src = './images/start-image.png';
-ctx.width = 512;
-ctx.height = 512;
-image.onload = () => ctx.drawImage(image, 0, 0,512,512);
+    const canvas = document.getElementById('work-canvas')
+    imgUrl = imgUrl || './images/start-image.png';
+    const ctx = canvas.getContext("2d");
+    const image = new Image();
+    image.src = imgUrl;
+    ctx.width = 512;
+    ctx.height = 512;
+    image.onload = () => ctx.drawImage(image, 0, 0,512,512);
 } 
 
 class Point {
-constructor(x, y) {
-    this.x = x;
-    this.y = y;
-}
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
 
-toString(){
-    return `${this.x} ${this.y}`;
-}
+    toString(){
+        return `${this.x} ${this.y}`;
+    }
 }
