@@ -43,7 +43,7 @@ canvas {
 
 .whiteboard {
     display: flex;
-    height: 94%;
+    height: 93%;
     background: #e0e0dc1c;
 }
 
@@ -142,11 +142,11 @@ canvas {
 }
 
 .red-color--circle {
-    background-color:red;
+    background-color:#ff0000;
 }
 
 .blue-color--circle {
-    background-color:blue;
+    background-color:#0000ff;
 }
 
 .menu-separater {
@@ -200,4 +200,8 @@ canvas {
 
 .whiteboard--changer--swither div input {
     margin-right: 10px;
+}
+
+selected-button {
+    outline: 1px solid #0000ff;
 }
