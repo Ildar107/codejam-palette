@@ -202,6 +202,6 @@ canvas {
     margin-right: 10px;
 }
 
-selected-button {
-    outline: 1px solid #0000ff;
+.selected-button {
+    color: #0000ff !important;
 }

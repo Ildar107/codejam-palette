@@ -16,32 +16,42 @@ window.onload = function() {
 
     blueColor.addEventListener('click', () => {
         color = '#0000ff'
-        if(blueColor.className.search('selected-button') >= 0)
+        if(blueColor.className.search('selected-button') >= 0) {
             blueColor.className = blueColor.className.replace(/selected-button/g, '')
-        else
-            blueColor.className = + ' selected-button';
+        }
+        else {
+            blueColor.className += ' selected-button';
+        }
     });
     redColor.addEventListener('click', () =>{
         color = '#ff0000'
-        if(redColor.className.search('selected-button') >= 0)
+        if(redColor.className.search('selected-button') >= 0) {
             redColor.className = redColor.className.replace(/selected-button/g, '')
-        else
-            redColor.className = + ' selected-button';
+        }
+        else {
+            redColor.className += ' selected-button';
+        }
     });
 
     pencil.addEventListener('click', () => {
         instrument = 'pencil'
-        if(pencil.className.search('selected-button') >= 0)
+        if(pencil.className.search('selected-button') >= 0) {
             pencil.className = pencil.className.replace(/selected-button/g, '')
-        else
-            pencil.className = + ' selected-button';
+        }
+        else {
+            pencil.className += ' selected-button';
+            bucket.className = bucket.className.replace(/selected-button/g, '')
+        }
     });
     bucket.addEventListener('click', () =>{
         instrument = 'bucket'
-        if(bucket.className.search('selected-button') >= 0)
+        if(bucket.className.search('selected-button') >= 0) {
             bucket.className = bucket.className.replace(/selected-button/g, '')
-        else
-            bucket.className = + ' selected-button';
+        }
+        else {
+            bucket.className += ' selected-button';
+            pencil.className = pencil.className.replace(/selected-button/g, '')
+        }
     });
 
     smallMatrixCheker.parentElement.addEventListener('click', (e) => {
