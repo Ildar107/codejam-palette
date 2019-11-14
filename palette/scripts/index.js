@@ -132,6 +132,7 @@ window.onload = function() {
             lastX = e.offsetX;
             lastY = e.offsetY;
         }
+        localStorage.setItem('currentImage', canvas.toDataURL("image/png"))
     });
     canvas.addEventListener('mouseup', () => isDrawing = false);
     this.document.body.addEventListener('mouseup', () => isDrawing = false);
