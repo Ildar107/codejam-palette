@@ -1,4 +1,4 @@
-let matrixSize = 4;
+let matrixSize = 128;
 let instrument = 'pencil';
 let color = '#008000';
 
@@ -96,13 +96,13 @@ window.onload = function() {
     smallMatrixChecker.parentElement.addEventListener('click', (e) => {
         if (e.returnValue) {
             smallMatrixChecker.checked = true;
-            matrixSize = 4;
+            matrixSize = 128;
         }
     });
     largeMatrixChecker.parentElement.addEventListener('click', (e) => {
         if (e.returnValue) {
             largeMatrixChecker.checked = true;
-            matrixSize = 32;
+            matrixSize = 16;
         }
     });
     startImage.parentElement.addEventListener('click', (e) => {
